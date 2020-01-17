@@ -72,6 +72,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Allegro_AddonFont>false</Allegro_AddonFont>
     <Allegro_LibraryType>DynamicDebug</Allegro_LibraryType>
+    <Allegro_AddonImage>true</Allegro_AddonImage>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -130,6 +131,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AllegroBitmap.cpp" />
     <ClCompile Include="src\AllegroDisplay.cpp" />
     <ClCompile Include="src\AllegroEventQueue.cpp" />
     <ClCompile Include="src\AllegroKeyboard.cpp" />
@@ -137,12 +139,19 @@
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="src\AllegroBitmap.h" />
     <ClInclude Include="src\AllegroDisplay.h" />
     <ClInclude Include="src\AllegroEventQueue.h" />
     <ClInclude Include="src\AllegroPong.h" />
     <ClInclude Include="src\AllegroKeyboard.h" />
     <ClInclude Include="src\AllegroTimer.h" />
     <ClInclude Include="src\IEventSource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="image.png">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+    </Image>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

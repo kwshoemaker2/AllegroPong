@@ -1,13 +1,12 @@
-#include <iostream>
 #include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>
 #include "AllegroDisplay.h"
-#include "AllegroKeyboard.h"
-#include "AllegroTimer.h"
 #include "AllegroEventQueue.h"
+#include "AllegroKeyboard.h"
+#include "AllegroBitmap.h"
 
 using namespace Pong;
 
-////////////////////////////////////////////////////////////////////////////////
 int main()
 {
     al_init();
@@ -18,40 +17,43 @@ int main()
     AllegroEventQueue queue;
     queue.Create();
 
-    AllegroTimer timer;
-    timer.Create(1.0 / 60.0);
-
     AllegroKeyboard keyboard;
     keyboard.Create();
 
     queue.RegisterEventSource(keyboard);
     queue.RegisterEventSource(display);
-    queue.RegisterEventSource(timer);
 
-    timer.Start();
-    INT32 sentinel = 0;
+    al_init_image_addon();
+    AllegroBitmap bitmap;
+    bitmap.Load("image.png");
+
+
     bool running = true;
-    while (running)
-    {
-        ALLEGRO_EVENT event;
-        queue.Wait(&event);
-        if (event.type == ALLEGRO_EVENT_KEY_UP || event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
-        {
-            running = false;
-        }
+    float x = 0;
 
-        if (event.type == ALLEGRO_EVENT_TIMER)
-        {
-            display.SetColor(sentinel, sentinel % 2, sentinel % 3);
-            display.Update();
-            sentinel++;
+    int width = display.GetDisplayWidth();
+    while (running) {
+        al_clear_to_color(al_map_rgba_f(1, 1, 1, 1));
+        bitmap.Draw(x += 0.01, 0, 0);
+        al_flip_display();
+
+
+        if (x > width) x = -bitmap.GetWidth();
+
+        ALLEGRO_EVENT event;
+
+        if (!queue.IsEmpty()) {
+            queue.Wait(&event);
+            if (event.type == ALLEGRO_EVENT_KEY_UP || event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+            {
+                running = false;
+            }
         }
     }
 
     display.Close();
     keyboard.Destroy();
-    timer.Destroy();
-    queue.Destroy();
+    bitmap.Destroy();
 
     return 0;
 }

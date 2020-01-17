@@ -42,6 +42,11 @@ bool Pong::AllegroEventQueue::Wait(ALLEGRO_EVENT* evt)
     return false;
 }
 
+bool Pong::AllegroEventQueue::IsEmpty() const
+{
+    return al_is_event_queue_empty(mEventQueue);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 bool Pong::AllegroEventQueue::RegisterEventSource(const IEventSource& eventSource)
 {

@@ -46,6 +46,11 @@ bool Pong::AllegroDisplay::Close()
     return success;
 }
 
+INT32 Pong::AllegroDisplay::GetDisplayWidth()
+{
+    return al_get_display_width(mAllegroDisplay);
+}
+
 EventSource* AllegroDisplay::GetEventSource() const
 {
     return al_get_display_event_source(mAllegroDisplay);

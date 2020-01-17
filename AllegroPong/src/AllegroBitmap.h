@@ -1,35 +1,34 @@
 #pragma once
 #include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>
 #include "AllegroPong.h"
-#include "IEventSource.h"
 
 namespace Pong {
     ////////////////////////////////////////////////////////////////////////////
-    class AllegroEventQueue
+    class AllegroBitmap
     {
     public:
         ////////////////////////////////////////////////////////////////////////
-        AllegroEventQueue() = default;
+        AllegroBitmap() = default;
 
         ////////////////////////////////////////////////////////////////////////
-        ~AllegroEventQueue();
+        ~AllegroBitmap();
 
         ////////////////////////////////////////////////////////////////////////
-        bool Create();
+        bool Load(const CHAR* path);
 
         ////////////////////////////////////////////////////////////////////////
         bool Destroy();
 
         ////////////////////////////////////////////////////////////////////////
-        bool Wait(ALLEGRO_EVENT* evt);
-
-        bool IsEmpty() const;
+        bool Draw(FLOAT32 dx, FLOAT32 dy, INT32 flags);
 
         ////////////////////////////////////////////////////////////////////////
-        bool RegisterEventSource(const IEventSource& eventSource);
+        INT32 GetWidth() const;
 
     private:
-        ALLEGRO_EVENT_QUEUE* mEventQueue = nullptr;
+        ALLEGRO_BITMAP* mBitmap = nullptr;
     };
 }
+
 
