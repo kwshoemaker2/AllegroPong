@@ -44,6 +44,9 @@ namespace Pong {
         ////////////////////////////////////////////////////////////////////////
         EventSource* GetEventSource() const override;
 
+        ////////////////////////////////////////////////////////////////////////
+        ALLEGRO_DISPLAY* GetRaw() { return mAllegroDisplay; }
+
     private:
         ALLEGRO_DISPLAY* mAllegroDisplay = nullptr;
     };

@@ -1,0 +1,43 @@
+#include "AllegroMouse.h"
+
+using namespace Pong;
+
+
+////////////////////////////////////////////////////////////////////////////////
+AllegroMouse::~AllegroMouse()
+{
+    Destroy();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Pong::AllegroMouse::Create()
+{
+    if (!mCreated)
+    {
+        return al_install_mouse();
+    }
+    return false;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Pong::AllegroMouse::Destroy()
+{
+    if (mCreated)
+    {
+        al_uninstall_mouse();
+        return true;
+    }
+    return false;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Pong::AllegroMouse::SetXY(AllegroDisplay& display, INT32 x, INT32 y)
+{
+    return al_set_mouse_xy(display.GetRaw(), x, y);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+EventSource* Pong::AllegroMouse::GetEventSource() const
+{
+    return al_get_mouse_event_source();
+}
