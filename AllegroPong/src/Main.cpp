@@ -30,15 +30,20 @@ int main()
 
     bool running = true;
     float x = 0;
+    float y = 0;
 
-    int width = display.GetDisplayWidth();
+    
+
+    const int width = display.GetWidth();
+    const int height = display.GetHeight();
     while (running) {
         al_clear_to_color(al_map_rgba_f(1, 1, 1, 1));
-        bitmap.Draw(x += 0.01, 0, 0);
+        bitmap.Draw(x += 0.1, y += 0.2, 0);
         al_flip_display();
 
 
         if (x > width) x = -bitmap.GetWidth();
+        if (y > height) y = -bitmap.GetHeight();
 
         ALLEGRO_EVENT event;
 

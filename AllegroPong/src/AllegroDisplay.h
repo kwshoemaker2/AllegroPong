@@ -27,7 +27,9 @@ namespace Pong {
         bool Close();
 
         ////////////////////////////////////////////////////////////////////////
-        INT32 GetDisplayWidth();
+        INT32 GetWidth() const;
+
+        INT32 GetHeight() const;
 
         ////////////////////////////////////////////////////////////////////////
         EventSource* GetEventSource() const override;

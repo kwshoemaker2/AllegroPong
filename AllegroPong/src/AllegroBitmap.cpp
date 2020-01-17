@@ -43,3 +43,9 @@ INT32 Pong::AllegroBitmap::GetWidth() const
 {
     return al_get_bitmap_width(mBitmap);
 }
+
+////////////////////////////////////////////////////////////////////////////////
+INT32 Pong::AllegroBitmap::GetHeight() const
+{
+    return al_get_bitmap_height(mBitmap);
+}
