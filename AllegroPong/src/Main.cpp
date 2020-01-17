@@ -2,6 +2,7 @@
 #include <allegro5/allegro.h>
 #include "AllegroDisplay.h"
 #include "AllegroKeyboard.h"
+#include "AllegroTimer.h"
 
 using namespace Pong;
 
@@ -9,7 +10,6 @@ using namespace Pong;
 int main()
 {
     ALLEGRO_EVENT_QUEUE* queue;
-    ALLEGRO_TIMER* timer;
 
     al_init();
 
@@ -17,15 +17,19 @@ int main()
     display.Create(640, 480);
 
     queue = al_create_event_queue();
-    timer = al_create_timer(1.0 / 60.0);
+
+    AllegroTimer timer;
+    timer.Create(1.0 / 60.0);
 
     AllegroKeyboard keyboard;
     keyboard.Create();
 
     al_register_event_source(queue, keyboard.GetEventSource());
     al_register_event_source(queue, display.GetEventSource());
-    al_register_event_source(queue, al_get_timer_event_source(timer));
+    al_register_event_source(queue, timer.GetEventSource());
 
+    timer.Start();
+    INT32 sentinel = 0;
     bool running = true;
     while (running)
     {
@@ -38,14 +42,17 @@ int main()
 
         if (event.type == ALLEGRO_EVENT_TIMER)
         {
+            display.SetColor(sentinel, sentinel % 2, sentinel % 3);
             display.Update();
+            sentinel++;
         }
     }
 
     display.Close();
     keyboard.Destroy();
 
-    al_destroy_timer(timer);
+    timer.Stop();
+    timer.Destroy();
 
     return 0;
 }

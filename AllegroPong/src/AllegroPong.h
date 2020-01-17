@@ -9,4 +9,5 @@ using UINT8 = unsigned char;
 using UINT16 = unsigned short;
 using UINT32 = unsigned int;
 using UINT64 = unsigned long long;
-
+using FLOAT32 = float;
+using FLOAT64 = double;
