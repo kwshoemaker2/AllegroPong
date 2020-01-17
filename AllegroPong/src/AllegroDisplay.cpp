@@ -33,6 +33,27 @@ bool Pong::AllegroDisplay::SetColor(INT32 r, INT32 g, INT32 b)
     return true;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+bool Pong::AllegroDisplay::SetColorA(INT32 r, INT32 g, INT32 b, INT32 a)
+{
+    al_clear_to_color(al_map_rgba(r, g, b, a));
+    return true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Pong::AllegroDisplay::SetColor(FLOAT32 r, FLOAT32 g, FLOAT32 b)
+{
+    al_clear_to_color(al_map_rgb_f(r, g, b));
+    return true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Pong::AllegroDisplay::SetColorA(FLOAT32 r, FLOAT32 g, FLOAT32 b, FLOAT32 a)
+{
+    al_clear_to_color(al_map_rgba_f(r, g, b, a));
+    return true;
+}
+
 bool Pong::AllegroDisplay::Close()
 {
     bool success = false;
