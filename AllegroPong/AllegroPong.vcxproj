@@ -131,11 +131,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AllegroDisplay.cpp" />
+    <ClCompile Include="src\AllegroKeyboard.cpp" />
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AllegroDisplay.h" />
     <ClInclude Include="src\AllegroPong.h" />
+    <ClInclude Include="src\AllegroKeyboard.h" />
+    <ClInclude Include="src\IEventSource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

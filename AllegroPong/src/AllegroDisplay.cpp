@@ -1,11 +1,11 @@
 #include "AllegroDisplay.h"
 
-using Pong::AllegroDisplay;
+using namespace Pong;
 
 ////////////////////////////////////////////////////////////////////////////////
 AllegroDisplay::~AllegroDisplay()
 {
-    al_destroy_display(mAllegroDisplay);
+    Close();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -31,4 +31,22 @@ bool Pong::AllegroDisplay::SetColor(INT32 r, INT32 g, INT32 b)
 {
     al_clear_to_color(al_map_rgb(r, g, b));
     return true;
+}
+
+bool Pong::AllegroDisplay::Close()
+{
+    bool success = false;
+    if (mAllegroDisplay != nullptr)
+    {
+        al_destroy_display(mAllegroDisplay);
+        mAllegroDisplay = nullptr;
+        success = true;
+    }
+
+    return success;
+}
+
+EventSource* AllegroDisplay::GetEventSource() const
+{
+    return al_get_display_event_source(mAllegroDisplay);
 }

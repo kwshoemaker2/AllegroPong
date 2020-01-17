@@ -24,12 +24,21 @@
     <ClCompile Include="src\AllegroDisplay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\AllegroKeyboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AllegroPong.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\AllegroDisplay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AllegroKeyboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IEventSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
