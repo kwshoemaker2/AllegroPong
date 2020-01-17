@@ -3,20 +3,20 @@
 #include "AllegroDisplay.h"
 #include "AllegroKeyboard.h"
 #include "AllegroTimer.h"
+#include "AllegroEventQueue.h"
 
 using namespace Pong;
 
 ////////////////////////////////////////////////////////////////////////////////
 int main()
 {
-    ALLEGRO_EVENT_QUEUE* queue;
-
     al_init();
 
     AllegroDisplay display;
     display.Create(640, 480);
 
-    queue = al_create_event_queue();
+    AllegroEventQueue queue;
+    queue.Create();
 
     AllegroTimer timer;
     timer.Create(1.0 / 60.0);
@@ -24,9 +24,9 @@ int main()
     AllegroKeyboard keyboard;
     keyboard.Create();
 
-    al_register_event_source(queue, keyboard.GetEventSource());
-    al_register_event_source(queue, display.GetEventSource());
-    al_register_event_source(queue, timer.GetEventSource());
+    queue.RegisterEventSource(keyboard);
+    queue.RegisterEventSource(display);
+    queue.RegisterEventSource(timer);
 
     timer.Start();
     INT32 sentinel = 0;
@@ -34,7 +34,7 @@ int main()
     while (running)
     {
         ALLEGRO_EVENT event;
-        al_wait_for_event(queue, &event);
+        queue.Wait(&event);
         if (event.type == ALLEGRO_EVENT_KEY_UP || event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
         {
             running = false;
@@ -50,9 +50,8 @@ int main()
 
     display.Close();
     keyboard.Destroy();
-
-    timer.Stop();
     timer.Destroy();
+    queue.Destroy();
 
     return 0;
 }
