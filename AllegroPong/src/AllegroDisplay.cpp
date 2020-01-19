@@ -54,6 +54,7 @@ bool Pong::AllegroDisplay::SetColorA(FLOAT32 r, FLOAT32 g, FLOAT32 b, FLOAT32 a)
     return true;
 }
 
+////////////////////////////////////////////////////////////////////////////////
 bool Pong::AllegroDisplay::Close()
 {
     bool success = false;
@@ -67,16 +68,19 @@ bool Pong::AllegroDisplay::Close()
     return success;
 }
 
+////////////////////////////////////////////////////////////////////////////////
 INT32 Pong::AllegroDisplay::GetWidth() const
 {
     return al_get_display_width(mAllegroDisplay);
 }
 
+////////////////////////////////////////////////////////////////////////////////
 INT32 Pong::AllegroDisplay::GetHeight() const
 {
     return al_get_display_height(mAllegroDisplay);
 }
 
+////////////////////////////////////////////////////////////////////////////////
 EventSource* AllegroDisplay::GetEventSource() const
 {
     return al_get_display_event_source(mAllegroDisplay);

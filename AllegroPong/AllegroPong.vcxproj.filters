@@ -45,6 +45,9 @@
     <ClCompile Include="src\AlMainModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AllegroPong.h">
@@ -65,9 +68,6 @@
     <ClInclude Include="src\AllegroEventQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\AllegroBitmap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -78,6 +78,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\AlMainModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
