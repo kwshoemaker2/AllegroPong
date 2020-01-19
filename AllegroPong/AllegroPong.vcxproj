@@ -138,6 +138,7 @@
     <ClCompile Include="src\AllegroKeyboardState.cpp" />
     <ClCompile Include="src\AllegroMouse.cpp" />
     <ClCompile Include="src\AllegroTimer.cpp" />
+    <ClCompile Include="src\AlMainModule.cpp" />
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +151,7 @@
     <ClInclude Include="src\AllegroPong.h" />
     <ClInclude Include="src\AllegroKeyboard.h" />
     <ClInclude Include="src\AllegroTimer.h" />
+    <ClInclude Include="src\AlMainModule.h" />
     <ClInclude Include="src\IEventSource.h" />
   </ItemGroup>
   <ItemGroup>

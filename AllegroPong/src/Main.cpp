@@ -6,12 +6,14 @@
 #include "AllegroKeyboardState.h"
 #include "AllegroMouse.h"
 #include "AllegroBitmap.h"
+#include "AlMainModule.h"
 
 using namespace Pong;
 
 int main()
 {
-    al_init();
+    AlMainModule mainModule;
+    mainModule.Create();
     al_init_image_addon();
 
     AllegroDisplay display;
