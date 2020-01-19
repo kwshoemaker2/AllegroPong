@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <array>
 #include "AllegroPong.h"
 #include "AllegroDisplay.h"
 #include "AllegroEventQueue.h"
@@ -9,7 +10,7 @@
 #include "AllegroBitmap.h"
 #include "AllegroTimer.h"
 #include "AlMainModule.h"
-
+#include "KeyPressHandler.h"
 
 namespace Pong {
     class Game
@@ -36,14 +37,16 @@ namespace Pong {
         AllegroEventQueue mEventQueue;
 
         AllegroKeyboard mKeyboard;
-        AllegroKeyboardState mKeyboardState;
         AllegroMouse mMouse;
+        KeyPressHandler mKeyPressHandler;
 
         static const std::string sImagePath;
         AllegroBitmap mBitmap;
 
         static const FLOAT64 sFps;
         AllegroTimer mTimer;
+
+        
     };
 }
 

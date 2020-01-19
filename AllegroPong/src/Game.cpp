@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Game.h"
 
 const std::string Pong::Game::sImagePath = "image.png";
@@ -7,24 +8,40 @@ bool Pong::Game::Init()
 {
     if (!mInitialized && !mRunning)
     {
-        mMainModule.Create();
-        al_init_image_addon();
+        const bool mainModuleInit = mMainModule.Create();
+        if (mainModuleInit == false)
+        {
+            std::cerr << "Could not initialize main module" << std::endl;
+            return false;
+        }
 
-        mDisplay.Create(sDisplayWidth, sDisplayHeight);
+        const bool imageAddonInit = al_init_image_addon();
+        if (imageAddonInit == false)
+        {
+            std::cerr << "Could not intialize image addon" << std::endl;
+            return false;
+        }
+
+        const bool displayCreated = mDisplay.Create(sDisplayWidth, sDisplayHeight);
+        if(displayCreated == false)
+        {
+            std::cerr << "Could not create display" << std::endl;
+        }
 
         mEventQueue.Create();
 
         mKeyboard.Create();
+
+        mTimer.Create(1.0 / sFps);
 
         mMouse.Create();
 
         mEventQueue.RegisterEventSource(mKeyboard);
         mEventQueue.RegisterEventSource(mDisplay);
         mEventQueue.RegisterEventSource(mMouse);
+        mEventQueue.RegisterEventSource(mTimer);
 
         mBitmap.Load(sImagePath.c_str());
-
-        mTimer.Create(1.0 / sFps);
 
         mInitialized = true;
     }
@@ -39,69 +56,91 @@ bool Pong::Game::Run()
     {
         success = GameLoop();
     }
-    return true;
+    return success;
 }
 
 bool Pong::Game::GameLoop()
 {
     mRunning = true;
-    float x = 0, y = 0;
 
-    int width = mDisplay.GetWidth();
+    mTimer.Start();
+
+    FLOAT32 x = 0;
+    FLOAT32 y = 0;
+
+    bool redraw = false;
+
     while (mRunning)
     {
-        mDisplay.SetColor(0, 0, 0);
-        mBitmap.Draw(x, y, 0);
-        mDisplay.Update();
-
         ALLEGRO_EVENT event;
 
-        if (!mEventQueue.IsEmpty())
+        mEventQueue.Wait(&event);
+        switch (event.type)
         {
-            mEventQueue.Wait(&event);
-            switch (event.type)
+            case ALLEGRO_EVENT_TIMER:
             {
-                case ALLEGRO_EVENT_DISPLAY_CLOSE:
+                FLOAT32 moveSpeed = 1;
+                if (mKeyPressHandler.KeyWasPressed(ALLEGRO_KEY_RIGHT))
                 {
-                    mRunning = false;
-                    break;
+                    x++;
                 }
-                case ALLEGRO_EVENT_MOUSE_AXES:
+                if (mKeyPressHandler.KeyWasPressed(ALLEGRO_KEY_LEFT))
                 {
-                    x = event.mouse.x;
-                    y = event.mouse.y;
-                    break;
+                    x--;
                 }
-                case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
+                if (mKeyPressHandler.KeyWasPressed(ALLEGRO_KEY_UP))
                 {
-                    x = y = 0;
-                    mMouse.SetXY(mDisplay, 0, 0);
-                    break;
+                    y--;
                 }
-                default:
+                if (mKeyPressHandler.KeyWasPressed(ALLEGRO_KEY_DOWN))
                 {
-                    break;
+                    y++;
                 }
+
+                mKeyPressHandler.ClearPresses();
+
+                redraw = true;
+                break;
+            }
+            case ALLEGRO_EVENT_KEY_DOWN:
+            {
+                mKeyPressHandler.KeyDown(event.keyboard.keycode);
+                break;
+            }
+            case ALLEGRO_EVENT_KEY_UP:
+            {
+                mKeyPressHandler.KeyUp(event.keyboard.keycode);
+                break;
+            }
+            case ALLEGRO_EVENT_DISPLAY_CLOSE:
+            {
+                mRunning = false;
+                break;
+            }
+            case ALLEGRO_EVENT_MOUSE_AXES:
+            {
+                x = event.mouse.x;
+                y = event.mouse.y;
+                break;
+            }
+            case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
+            {
+                x = y = 0;
+                mMouse.SetXY(mDisplay, 0, 0);
+                break;
+            }
+            default:
+            {
+                break;
             }
         }
 
-        // Actively poll the keyboard
-        mKeyboardState.Refresh();
-
-        FLOAT64 moveSpeed = 0.01;
-        if (mKeyboardState.KeyIsDown(ALLEGRO_KEY_LCTRL))
+        if (redraw)
         {
-            moveSpeed = 0.1;
-        }
-
-        if (mKeyboardState.KeyIsDown(ALLEGRO_KEY_RIGHT))
-        {
-            x += moveSpeed;
-        }
-
-        if (mKeyboardState.KeyIsDown(ALLEGRO_KEY_LEFT))
-        {
-            x -= moveSpeed;
+            mDisplay.SetColor(0, 0, 0);
+            mBitmap.Draw(x, y, 0);
+            mDisplay.Update();
+            redraw = false;
         }
     }
 
