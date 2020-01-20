@@ -24,6 +24,8 @@ namespace Pong {
         bool Run();
     private:
         bool GameLoop();
+        void HandleUserMovement(FLOAT32& x, FLOAT32& y);
+        void HandleCpuMovement(FLOAT32& x, FLOAT32& y);
 
         bool mInitialized = false;
         bool mRunning = false;
@@ -41,7 +43,8 @@ namespace Pong {
         KeyPressHandler mKeyPressHandler;
 
         static const std::string sImagePath;
-        AllegroBitmap mBitmap;
+        AllegroBitmap mUserIcon;
+        AllegroBitmap mCpuIcon;
 
         static const FLOAT64 sFps;
         AllegroTimer mTimer;

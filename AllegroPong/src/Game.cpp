@@ -4,6 +4,7 @@
 const std::string Pong::Game::sImagePath = "image.png";
 const FLOAT64 Pong::Game::sFps = 60.0;
 
+////////////////////////////////////////////////////////////////////////////////
 bool Pong::Game::Init()
 {
     if (!mInitialized && !mRunning)
@@ -41,13 +42,15 @@ bool Pong::Game::Init()
         mEventQueue.RegisterEventSource(mMouse);
         mEventQueue.RegisterEventSource(mTimer);
 
-        mBitmap.Load(sImagePath.c_str());
+        mUserIcon.Load(sImagePath.c_str());
+        mCpuIcon.Load(sImagePath.c_str());
 
         mInitialized = true;
     }
 
     return mInitialized;
 }
+
 
 bool Pong::Game::Run()
 {
@@ -59,14 +62,18 @@ bool Pong::Game::Run()
     return success;
 }
 
+////////////////////////////////////////////////////////////////////////////////
 bool Pong::Game::GameLoop()
 {
     mRunning = true;
 
     mTimer.Start();
 
-    FLOAT32 x = 0;
-    FLOAT32 y = 0;
+    FLOAT32 userX = 0;
+    FLOAT32 userY = 0;
+
+    FLOAT32 cpuX = 0;
+    FLOAT32 cpuY = 0;
 
     bool redraw = false;
 
@@ -79,26 +86,8 @@ bool Pong::Game::GameLoop()
         {
             case ALLEGRO_EVENT_TIMER:
             {
-                FLOAT32 moveSpeed = 1;
-                if (mKeyPressHandler.KeyWasPressed(ALLEGRO_KEY_RIGHT))
-                {
-                    x++;
-                }
-                if (mKeyPressHandler.KeyWasPressed(ALLEGRO_KEY_LEFT))
-                {
-                    x--;
-                }
-                if (mKeyPressHandler.KeyWasPressed(ALLEGRO_KEY_UP))
-                {
-                    y--;
-                }
-                if (mKeyPressHandler.KeyWasPressed(ALLEGRO_KEY_DOWN))
-                {
-                    y++;
-                }
-
-                mKeyPressHandler.ClearPresses();
-
+                HandleUserMovement(userX, userY);
+                HandleCpuMovement(cpuX, cpuY);
                 redraw = true;
                 break;
             }
@@ -119,13 +108,13 @@ bool Pong::Game::GameLoop()
             }
             case ALLEGRO_EVENT_MOUSE_AXES:
             {
-                x = event.mouse.x;
-                y = event.mouse.y;
+                userX = event.mouse.x;
+                userY = event.mouse.y;
                 break;
             }
             case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
             {
-                x = y = 0;
+                userX = userY = 0;
                 mMouse.SetXY(mDisplay, 0, 0);
                 break;
             }
@@ -135,14 +124,52 @@ bool Pong::Game::GameLoop()
             }
         }
 
-        if (redraw)
+        if (redraw && mEventQueue.IsEmpty())
         {
             mDisplay.SetColor(0, 0, 0);
-            mBitmap.Draw(x, y, 0);
+            mUserIcon.Draw(userX, userY, 0);
+            mCpuIcon.Draw(cpuX, cpuY, 0);
             mDisplay.Update();
             redraw = false;
         }
     }
 
     return true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Pong::Game::HandleUserMovement(FLOAT32& x, FLOAT32& y)
+{
+    FLOAT32 moveSpeed = 1;
+    if (mKeyPressHandler.KeyWasPressed(ALLEGRO_KEY_RIGHT))
+    {
+        x++;
+    }
+    if (mKeyPressHandler.KeyWasPressed(ALLEGRO_KEY_LEFT))
+    {
+        x--;
+    }
+    if (mKeyPressHandler.KeyWasPressed(ALLEGRO_KEY_UP))
+    {
+        y--;
+    }
+    if (mKeyPressHandler.KeyWasPressed(ALLEGRO_KEY_DOWN))
+    {
+        y++;
+    }
+
+    mKeyPressHandler.ClearPresses();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Pong::Game::HandleCpuMovement(FLOAT32& x, FLOAT32& y)
+{
+    if (x < mDisplay.GetWidth())
+    {
+        x++;
+    }
+    else
+    {
+        x = 0;
+    }
 }
