@@ -51,7 +51,7 @@ bool Pong::Game::Init()
     return mInitialized;
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
 bool Pong::Game::Run()
 {
     bool success = false;
@@ -164,12 +164,31 @@ void Pong::Game::HandleUserMovement(FLOAT32& x, FLOAT32& y)
 ////////////////////////////////////////////////////////////////////////////////
 void Pong::Game::HandleCpuMovement(FLOAT32& x, FLOAT32& y)
 {
-    if (x < mDisplay.GetWidth())
     {
-        x++;
+        static FLOAT32 dx = 2;
+        const auto farX = mCpuIcon.GetWidth() + x;
+        if (farX >= mDisplay.GetWidth())
+        {
+            dx = -dx;
+        }
+        else if (x < 0)
+        {
+            dx = -dx;
+        }
+        x += dx;
     }
-    else
+
     {
-        x = 0;
+        static FLOAT32 dy = -2;
+        const auto farY = mCpuIcon.GetHeight() + y;
+        if (farY >= mDisplay.GetHeight())
+        {
+            dy = -dy;
+        }
+        else if (y < 0)
+        {
+            dy = -dy;
+        }
+        y += dy;
     }
 }
