@@ -13,18 +13,45 @@
 #include "KeyPressHandler.h"
 
 namespace Pong {
+    ////////////////////////////////////////////////////////////////////////////
+    class GameIcon
+    {
+    public:
+        void Draw();
+
+        bool DoesCollide(const GameIcon& other) const;
+
+        FLOAT32 Height() const;
+        FLOAT32 Width() const;
+
+        FLOAT32 X = 0.0f;
+        FLOAT32 Y = 0.0f;
+        AllegroBitmap Bitmap;
+    };
+
+    ////////////////////////////////////////////////////////////////////////////
     class Game
     {
     public:
+        ////////////////////////////////////////////////////////////////////////////
         Game() = default;
+
+        ////////////////////////////////////////////////////////////////////////////
         ~Game() = default;
 
+        ////////////////////////////////////////////////////////////////////////////
         bool Init();
 
+        ////////////////////////////////////////////////////////////////////////////
         bool Run();
     private:
+        ////////////////////////////////////////////////////////////////////////////
         bool GameLoop();
+
+        ////////////////////////////////////////////////////////////////////////////
         void HandleUserMovement(FLOAT32& x, FLOAT32& y);
+
+        ////////////////////////////////////////////////////////////////////////////
         void HandleCpuMovement(FLOAT32& x, FLOAT32& y);
 
         bool mInitialized = false;
@@ -43,13 +70,11 @@ namespace Pong {
         KeyPressHandler mKeyPressHandler;
 
         static const std::string sImagePath;
-        AllegroBitmap mUserIcon;
-        AllegroBitmap mCpuIcon;
+        GameIcon mUserIcon;
+        GameIcon mCpuIcon;
 
         static const FLOAT64 sFps;
         AllegroTimer mTimer;
-
-        
     };
 }
 

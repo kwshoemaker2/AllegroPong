@@ -42,8 +42,8 @@ bool Pong::Game::Init()
         mEventQueue.RegisterEventSource(mMouse);
         mEventQueue.RegisterEventSource(mTimer);
 
-        mUserIcon.Load(sImagePath.c_str());
-        mCpuIcon.Load(sImagePath.c_str());
+        mUserIcon.Bitmap.Load(sImagePath.c_str());
+        mCpuIcon.Bitmap.Load(sImagePath.c_str());
 
         mInitialized = true;
     }
@@ -69,12 +69,6 @@ bool Pong::Game::GameLoop()
 
     mTimer.Start();
 
-    FLOAT32 userX = 0;
-    FLOAT32 userY = 0;
-
-    FLOAT32 cpuX = 0;
-    FLOAT32 cpuY = 0;
-
     bool redraw = false;
 
     while (mRunning)
@@ -86,8 +80,8 @@ bool Pong::Game::GameLoop()
         {
             case ALLEGRO_EVENT_TIMER:
             {
-                HandleUserMovement(userX, userY);
-                HandleCpuMovement(cpuX, cpuY);
+                HandleUserMovement(mUserIcon.X, mUserIcon.Y);
+                HandleCpuMovement(mCpuIcon.X, mCpuIcon.Y);
                 redraw = true;
                 break;
             }
@@ -108,13 +102,13 @@ bool Pong::Game::GameLoop()
             }
             case ALLEGRO_EVENT_MOUSE_AXES:
             {
-                userX = event.mouse.x;
-                userY = event.mouse.y;
+                mUserIcon.X = event.mouse.x;
+                mUserIcon.Y = event.mouse.y;
                 break;
             }
             case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
             {
-                userX = userY = 0;
+                mUserIcon.X = mUserIcon.Y = 0;
                 mMouse.SetXY(mDisplay, 0, 0);
                 break;
             }
@@ -127,8 +121,8 @@ bool Pong::Game::GameLoop()
         if (redraw && mEventQueue.IsEmpty())
         {
             mDisplay.SetColor(0, 0, 0);
-            mUserIcon.Draw(userX, userY, 0);
-            mCpuIcon.Draw(cpuX, cpuY, 0);
+            mUserIcon.Draw();
+            mCpuIcon.Draw();
             mDisplay.Update();
             redraw = false;
         }
@@ -140,7 +134,6 @@ bool Pong::Game::GameLoop()
 ////////////////////////////////////////////////////////////////////////////////
 void Pong::Game::HandleUserMovement(FLOAT32& x, FLOAT32& y)
 {
-    FLOAT32 moveSpeed = 1;
     if (mKeyPressHandler.KeyWasPressed(ALLEGRO_KEY_RIGHT))
     {
         x++;
@@ -164,31 +157,67 @@ void Pong::Game::HandleUserMovement(FLOAT32& x, FLOAT32& y)
 ////////////////////////////////////////////////////////////////////////////////
 void Pong::Game::HandleCpuMovement(FLOAT32& x, FLOAT32& y)
 {
+    static FLOAT32 dx = 2;
+    static FLOAT32 dy = -2;
+
+    if (mCpuIcon.DoesCollide(mUserIcon))
     {
-        static FLOAT32 dx = 2;
-        const auto farX = mCpuIcon.GetWidth() + x;
-        if (farX >= mDisplay.GetWidth())
-        {
-            dx = -dx;
-        }
-        else if (x < 0)
-        {
-            dx = -dx;
-        }
-        x += dx;
+        dx = -dx;
+        dy = -dy;
     }
 
+    const auto farX = mCpuIcon.Width() + x;
+    if (farX >= mDisplay.GetWidth())
     {
-        static FLOAT32 dy = -2;
-        const auto farY = mCpuIcon.GetHeight() + y;
-        if (farY >= mDisplay.GetHeight())
-        {
-            dy = -dy;
-        }
-        else if (y < 0)
-        {
-            dy = -dy;
-        }
-        y += dy;
+        dx = -dx;
     }
+    else if (x < 0)
+    {
+        dx = -dx;
+    }
+    x += dx;
+
+    const auto farY = mCpuIcon.Height() + y;
+    if (farY >= mDisplay.GetHeight())
+    {
+        dy = -dy;
+    }
+    else if (y < 0)
+    {
+        dy = -dy;
+    }
+    y += dy;
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Pong::GameIcon::Draw()
+{
+    Bitmap.Draw(X, Y, 0);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+bool Pong::GameIcon::DoesCollide(const GameIcon& other) const
+{
+    // AABB - AABB collision
+    // Collision x-axis?
+    const bool collisionX = ((this->X + this->Width()) >= other.X) &&
+        ((other.X + other.Width()) >= this->X);
+    // Collision y-axis?
+    const bool collisionY = ((this->Y + this->Height()) >= other.Y) &&
+        ((other.Y + other.Height()) >= this->Y);
+    // Collision only if on both axes
+    return collisionX && collisionY;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+FLOAT32 Pong::GameIcon::Height() const
+{
+    return static_cast<FLOAT32>(Bitmap.GetHeight());
+}
+
+////////////////////////////////////////////////////////////////////////////////
+FLOAT32 Pong::GameIcon::Width() const
+{
+    return static_cast<FLOAT32>(Bitmap.GetWidth());
 }
