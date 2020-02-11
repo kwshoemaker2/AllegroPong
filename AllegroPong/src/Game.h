@@ -11,30 +11,18 @@
 #include "AllegroTimer.h"
 #include "AlMainModule.h"
 #include "KeyPressHandler.h"
+#include "AllegroMouseEvent.h"
+#include "GameCharacters.h"
 
 namespace Pong {
-    ////////////////////////////////////////////////////////////////////////////
-    class GameIcon
-    {
-    public:
-        void Draw();
-
-        bool DoesCollide(const GameIcon& other) const;
-
-        FLOAT32 Height() const;
-        FLOAT32 Width() const;
-
-        FLOAT32 X = 0.0f;
-        FLOAT32 Y = 0.0f;
-        AllegroBitmap Bitmap;
-    };
-
     ////////////////////////////////////////////////////////////////////////////
     class Game
     {
     public:
         ////////////////////////////////////////////////////////////////////////////
-        Game() = default;
+        Game()
+            :mPlayer(mKeyPressHandler)
+        {}
 
         ////////////////////////////////////////////////////////////////////////////
         ~Game() = default;
@@ -70,11 +58,11 @@ namespace Pong {
         KeyPressHandler mKeyPressHandler;
 
         static const std::string sImagePath;
-        GameIcon mUserIcon;
-        GameIcon mCpuIcon;
 
         static const FLOAT64 sFps;
         AllegroTimer mTimer;
+
+        Player mPlayer;
     };
 }
 

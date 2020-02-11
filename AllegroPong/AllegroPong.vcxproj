@@ -140,6 +140,7 @@
     <ClCompile Include="src\AllegroTimer.cpp" />
     <ClCompile Include="src\AlMainModule.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameCharacters.cpp" />
     <ClCompile Include="src\KeyPressHandler.cpp" />
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
@@ -149,11 +150,13 @@
     <ClInclude Include="src\AllegroEventQueue.h" />
     <ClInclude Include="src\AllegroKeyboardState.h" />
     <ClInclude Include="src\AllegroMouse.h" />
+    <ClInclude Include="src\AllegroMouseEvent.h" />
     <ClInclude Include="src\AllegroPong.h" />
     <ClInclude Include="src\AllegroKeyboard.h" />
     <ClInclude Include="src\AllegroTimer.h" />
     <ClInclude Include="src\AlMainModule.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\GameCharacters.h" />
     <ClInclude Include="src\IEventSource.h" />
     <ClInclude Include="src\KeyPressHandler.h" />
   </ItemGroup>
