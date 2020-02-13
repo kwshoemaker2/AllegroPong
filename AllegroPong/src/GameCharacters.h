@@ -1,6 +1,7 @@
 #include <string>
 #include "AllegroBitmap.h"
 #include "AllegroMouseEvent.h"
+#include "AllegroDisplay.h"
 #include "KeyPressHandler.h"
 
 namespace Pong {
@@ -39,12 +40,30 @@ namespace Pong {
         {}
 
         bool Init() override;
+
         void Move() override;
 
         void DoMouseEvent(const AllegroMouseEvent& mouseEvent);
 
+        void HandleCollisionWithDisplay(const AllegroDisplay& display);
+
     private:
         const CHAR* sBitmapPath = "image.png";
+        static constexpr FLOAT32 sSpeed = 5.0F;
         const KeyPressHandler& mKeyPressHandler;
+    };
+
+    class Opponent : public Character
+    {
+    public:
+        bool Init() override;
+        void Move() override;
+
+        void HandleCollisionWithDisplay(const AllegroDisplay& display);
+
+    private:
+        FLOAT32 mDy = sSpeed;
+        const CHAR* sBitmapPath = "image.png";
+        static constexpr FLOAT32 sSpeed = 5.0F;
     };
 }

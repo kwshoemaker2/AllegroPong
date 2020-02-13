@@ -4,6 +4,11 @@
 const std::string Pong::Game::sImagePath = "image.png";
 const FLOAT64 Pong::Game::sFps = 60.0;
 
+Pong::Game::Game()
+    :mPlayer(mKeyPressHandler)
+{
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 bool Pong::Game::Init()
 {
@@ -43,6 +48,7 @@ bool Pong::Game::Init()
         mEventQueue.RegisterEventSource(mTimer);
 
         mPlayer.Init();
+        mOpponent.Init();
 
         mInitialized = true;
     }
@@ -80,7 +86,12 @@ bool Pong::Game::GameLoop()
             case ALLEGRO_EVENT_TIMER:
             {
                 mPlayer.Move();
+                mOpponent.Move();
                 mKeyPressHandler.ClearPresses();
+
+                mPlayer.HandleCollisionWithDisplay(mDisplay);
+                mOpponent.HandleCollisionWithDisplay(mDisplay);
+
                 redraw = true;
                 break;
             }
@@ -115,6 +126,8 @@ bool Pong::Game::GameLoop()
         {
             mDisplay.SetColor(0, 0, 0);
             mPlayer.Draw();
+            mOpponent.Draw();
+
             mDisplay.Update();
             redraw = false;
         }

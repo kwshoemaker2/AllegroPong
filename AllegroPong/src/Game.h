@@ -20,9 +20,7 @@ namespace Pong {
     {
     public:
         ////////////////////////////////////////////////////////////////////////////
-        Game()
-            :mPlayer(mKeyPressHandler)
-        {}
+        Game();
 
         ////////////////////////////////////////////////////////////////////////////
         ~Game() = default;
@@ -35,12 +33,6 @@ namespace Pong {
     private:
         ////////////////////////////////////////////////////////////////////////////
         bool GameLoop();
-
-        ////////////////////////////////////////////////////////////////////////////
-        void HandleUserMovement(FLOAT32& x, FLOAT32& y);
-
-        ////////////////////////////////////////////////////////////////////////////
-        void HandleCpuMovement(FLOAT32& x, FLOAT32& y);
 
         bool mInitialized = false;
         bool mRunning = false;
@@ -63,6 +55,7 @@ namespace Pong {
         AllegroTimer mTimer;
 
         Player mPlayer;
+        Opponent mOpponent;
     };
 }
 
