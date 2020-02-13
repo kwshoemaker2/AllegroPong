@@ -49,6 +49,7 @@ bool Pong::Game::Init()
 
         mPlayer.Init();
         mOpponent.Init();
+        mBall.Init();
 
         mInitialized = true;
     }
@@ -87,11 +88,13 @@ bool Pong::Game::GameLoop()
             {
                 mPlayer.Move();
                 mOpponent.Move();
-                mKeyPressHandler.ClearPresses();
+                mBall.Move();
 
                 mPlayer.HandleCollisionWithDisplay(mDisplay);
                 mOpponent.HandleCollisionWithDisplay(mDisplay);
+                mBall.HandleCollisionWithDisplay(mDisplay);
 
+                mKeyPressHandler.ClearPresses();
                 redraw = true;
                 break;
             }
@@ -127,6 +130,7 @@ bool Pong::Game::GameLoop()
             mDisplay.SetColor(0, 0, 0);
             mPlayer.Draw();
             mOpponent.Draw();
+            mBall.Draw();
 
             mDisplay.Update();
             redraw = false;

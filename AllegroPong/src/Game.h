@@ -56,6 +56,7 @@ namespace Pong {
 
         Player mPlayer;
         Opponent mOpponent;
+        Ball mBall;
     };
 }
 

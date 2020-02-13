@@ -66,4 +66,19 @@ namespace Pong {
         const CHAR* sBitmapPath = "image.png";
         static constexpr FLOAT32 sSpeed = 5.0F;
     };
+
+    class Ball : public Character
+    {
+    public:
+        bool Init() override;
+        void Move() override;
+
+        void HandleCollisionWithDisplay(const AllegroDisplay& display);
+
+    private:
+        FLOAT32 mDx = sSpeed;
+        FLOAT32 mDy = sSpeed;
+        const CHAR* sBitmapPath = "image.png";
+        static constexpr FLOAT32 sSpeed = 5.0F;
+    };
 }
