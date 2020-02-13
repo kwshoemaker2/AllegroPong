@@ -19,8 +19,8 @@ namespace Pong {
 
         void Draw();
 
-        FLOAT32 Height() const;
-        FLOAT32 Width() const;
+        FLOAT32 GetHeight() const;
+        FLOAT32 GetWidth() const;
 
         FLOAT32 GetX() const { return mCoords.X; }
         FLOAT32 GetY() const { return mCoords.Y; }
@@ -46,6 +46,7 @@ namespace Pong {
         void DoMouseEvent(const AllegroMouseEvent& mouseEvent);
 
         void HandleCollisionWithDisplay(const AllegroDisplay& display);
+        void HandleCollisionWithCharacter(const Character& character);
 
     private:
         const CHAR* sBitmapPath = "image.png";
@@ -74,6 +75,7 @@ namespace Pong {
         void Move() override;
 
         void HandleCollisionWithDisplay(const AllegroDisplay& display);
+        void HandleCollisionWithCharacter(const Character& character);
 
     private:
         FLOAT32 mDx = sSpeed;

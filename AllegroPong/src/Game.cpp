@@ -34,14 +34,11 @@ bool Pong::Game::Init()
             std::cerr << "Could not create display" << std::endl;
         }
 
-        mEventQueue.Create();
-
         mKeyboard.Create();
-
         mTimer.Create(1.0 / sFps);
-
         mMouse.Create();
 
+        mEventQueue.Create();
         mEventQueue.RegisterEventSource(mKeyboard);
         mEventQueue.RegisterEventSource(mDisplay);
         mEventQueue.RegisterEventSource(mMouse);
@@ -92,7 +89,10 @@ bool Pong::Game::GameLoop()
 
                 mPlayer.HandleCollisionWithDisplay(mDisplay);
                 mOpponent.HandleCollisionWithDisplay(mDisplay);
+
                 mBall.HandleCollisionWithDisplay(mDisplay);
+                mBall.HandleCollisionWithCharacter(mPlayer);
+                mBall.HandleCollisionWithCharacter(mOpponent);
 
                 mKeyPressHandler.ClearPresses();
                 redraw = true;
