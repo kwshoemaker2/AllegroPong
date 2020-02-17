@@ -5,7 +5,8 @@ const std::string Pong::Game::sImagePath = "image.png";
 const FLOAT64 Pong::Game::sFps = 60.0;
 
 Pong::Game::Game()
-    :mPlayer(mKeyPressHandler)
+    :mPlayer(mKeyPressHandler),
+     mBall(sDisplayWidth, sDisplayHeight)
 {
 }
 

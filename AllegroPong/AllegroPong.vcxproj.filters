@@ -100,7 +100,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="image.png">
+    <Image Include="paddle.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ball.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

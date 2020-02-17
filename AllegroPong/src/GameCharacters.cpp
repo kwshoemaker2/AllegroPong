@@ -107,16 +107,19 @@ void Pong::Opponent::HandleCollisionWithDisplay(const AllegroDisplay& display)
     }
 }
 
+Pong::Ball::Ball(FLOAT32 displayWidth, FLOAT32 displayHeight)
+    :mInitX((displayWidth / 2.0F)),
+     mInitY((displayHeight / 2.0F))
+{
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 bool Pong::Ball::Init()
 {
     bool retval = mBitmap.Load(sBitmapPath);
     if (retval)
     {
-        mCoords.X = 640.0F / 2.0F;
-        mCoords.X -= GetWidth();
-        mCoords.Y = 480.0F / 2.0F;
-        mCoords.Y -= GetHeight();
+        MoveToInitCoords();
     }
 
     return retval;
@@ -143,18 +146,6 @@ void Pong::Ball::HandleCollisionWithDisplay(const AllegroDisplay& display)
         mCoords.Y = lowerHeight;
         mDy = -mDy;
     }
-
-    const auto rightWidth = display.GetWidth() - GetWidth();
-    if (mCoords.X < 0)
-    {
-        mCoords.X = 0;
-        mDx = -mDx;
-    }
-    else if (mCoords.X > rightWidth)
-    {
-        mCoords.X = rightWidth;
-        mDx = -mDx;
-    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -173,4 +164,18 @@ void Pong::Ball::HandleCollisionWithCharacter(const Character& character)
         mDy = -mDy;
         mCoords.Y += mDy;
     }
+    else if (collidesX)
+    {
+        mDx = -mDx;
+        mDy = -mDy;
+
+        MoveToInitCoords();
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Pong::Ball::MoveToInitCoords()
+{
+    mCoords.X = mInitX - GetWidth();
+    mCoords.Y = mInitY - GetHeight();
 }

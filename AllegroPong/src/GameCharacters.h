@@ -49,7 +49,7 @@ namespace Pong {
         void HandleCollisionWithCharacter(const Character& character);
 
     private:
-        const CHAR* sBitmapPath = "image.png";
+        const CHAR* sBitmapPath = "paddle.png";
         static constexpr FLOAT32 sSpeed = 5.0F;
         const KeyPressHandler& mKeyPressHandler;
     };
@@ -64,13 +64,16 @@ namespace Pong {
 
     private:
         FLOAT32 mDy = sSpeed;
-        const CHAR* sBitmapPath = "image.png";
+        const CHAR* sBitmapPath = "paddle.png";
         static constexpr FLOAT32 sSpeed = 5.0F;
     };
 
     class Ball : public Character
     {
     public:
+        Ball() = delete;
+        Ball(FLOAT32 displayWidth, FLOAT32 displayHeight);
+
         bool Init() override;
         void Move() override;
 
@@ -78,9 +81,13 @@ namespace Pong {
         void HandleCollisionWithCharacter(const Character& character);
 
     private:
+        void MoveToInitCoords();
+
+        const FLOAT32 mInitX;
+        const FLOAT32 mInitY;
         FLOAT32 mDx = sSpeed;
         FLOAT32 mDy = sSpeed;
-        const CHAR* sBitmapPath = "image.png";
-        static constexpr FLOAT32 sSpeed = 5.0F;
+        const CHAR* sBitmapPath = "ball.png";
+        static constexpr FLOAT32 sSpeed = 4.0F;
     };
 }

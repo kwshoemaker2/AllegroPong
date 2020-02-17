@@ -13,7 +13,7 @@ bool Pong::AllegroBitmap::Load(const CHAR* path)
 {
     if (mBitmap == nullptr)
     {
-        mBitmap = al_load_bitmap("image.png");
+        mBitmap = al_load_bitmap(path);
         return true;
     }
     return false;

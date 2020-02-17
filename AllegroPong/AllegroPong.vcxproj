@@ -161,9 +161,8 @@
     <ClInclude Include="src\KeyPressHandler.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="image.png">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-    </Image>
+    <Image Include="ball.png" />
+    <Image Include="paddle.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
