@@ -95,6 +95,17 @@ bool Pong::Game::GameLoop()
                 mBall.HandleCollisionWithCharacter(mPlayer);
                 mBall.HandleCollisionWithCharacter(mOpponent);
 
+                if (mBall.HandleCharacterMiss(mPlayer))
+                {
+                    mOpponentScore++;
+                    std::cout << "Opponent scored: " << mOpponentScore << std::endl;
+                }
+                else if (mBall.HandleCharacterMiss(mOpponent))
+                {
+                    mPlayerScore++;
+                    std::cout << "Player scored: " << mPlayerScore << std::endl;
+                }
+
                 mKeyPressHandler.ClearPresses();
                 redraw = true;
                 break;

@@ -80,6 +80,8 @@ namespace Pong {
         void HandleCollisionWithDisplay(const AllegroDisplay& display);
         void HandleCollisionWithCharacter(const Character& character);
 
+        bool HandleCharacterMiss(const Character& character);
+
     private:
         void MoveToInitCoords();
 

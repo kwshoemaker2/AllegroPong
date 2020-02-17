@@ -164,13 +164,26 @@ void Pong::Ball::HandleCollisionWithCharacter(const Character& character)
         mDy = -mDy;
         mCoords.Y += mDy;
     }
-    else if (collidesX)
+}
+
+bool Pong::Ball::HandleCharacterMiss(const Character& character)
+{
+    const bool collidesX = ((GetX() + GetWidth()) >= character.GetX()) &&
+        ((character.GetX() + character.GetWidth()) >= GetX());
+
+    const bool collidesY = ((GetY() + GetHeight()) >= character.GetY()) &&
+        ((character.GetY() + character.GetHeight()) >= GetY());
+
+    bool retval = false;
+    if (!collidesY && collidesX)
     {
         mDx = -mDx;
         mDy = -mDy;
 
         MoveToInitCoords();
+        retval = true;
     }
+    return retval;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -57,6 +57,9 @@ namespace Pong {
         Player mPlayer;
         Opponent mOpponent;
         Ball mBall;
+
+        UINT16 mPlayerScore = 0;
+        UINT16 mOpponentScore = 0;
     };
 }
 
