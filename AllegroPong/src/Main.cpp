@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include "Game.h"
@@ -7,6 +9,7 @@ using namespace Pong;
 
 int main()
 {
+    srand(time(NULL));
     Game game;
 
     bool success = false;

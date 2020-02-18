@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include "GameCharacters.h"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -73,6 +74,11 @@ void Pong::Player::HandleCollisionWithCharacter(const Character& character)
     }
 }
 
+Pong::Opponent::Opponent(const Character& ball)
+    :mBall(ball)
+{
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 bool Pong::Opponent::Init()
 {
@@ -89,6 +95,17 @@ bool Pong::Opponent::Init()
 ////////////////////////////////////////////////////////////////////////////////
 void Pong::Opponent::Move()
 {
+    if (mBall.GetY() > mCoords.Y)
+    {
+        // Move up
+        mDy = sSpeed;
+    }
+    else if (mBall.GetY() < mCoords.Y)
+    {
+        // Move down
+        mDy = -sSpeed;
+    }
+
     mCoords.Y += mDy;
 }
 
@@ -98,12 +115,10 @@ void Pong::Opponent::HandleCollisionWithDisplay(const AllegroDisplay& display)
     if (mCoords.Y < 0)
     {
         mCoords.Y = 0;
-        mDy = -mDy;
     }
     else if (mCoords.Y > lowerHeight)
     {
         mCoords.Y = lowerHeight;
-        mDy = -mDy;
     }
 }
 
@@ -139,12 +154,14 @@ void Pong::Ball::HandleCollisionWithDisplay(const AllegroDisplay& display)
     if (mCoords.Y < 0)
     {
         mCoords.Y = 0;
-        mDy = -mDy;
+        mDy = sSpeed;
+        mDy += static_cast<FLOAT32>((rand() % 3));
     }
     else if (mCoords.Y > lowerHeight)
     {
         mCoords.Y = lowerHeight;
-        mDy = -mDy;
+        mDy = -sSpeed;
+        mDy -= static_cast<FLOAT32>((rand() % 3));
     }
 }
 

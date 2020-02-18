@@ -54,9 +54,9 @@ namespace Pong {
         static const FLOAT64 sFps;
         AllegroTimer mTimer;
 
+        Ball mBall;
         Player mPlayer;
         Opponent mOpponent;
-        Ball mBall;
 
         UINT16 mPlayerScore = 0;
         UINT16 mOpponentScore = 0;

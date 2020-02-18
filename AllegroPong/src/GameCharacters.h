@@ -57,6 +57,9 @@ namespace Pong {
     class Opponent : public Character
     {
     public:
+        Opponent() = delete;
+        Opponent(const Character& ball);
+
         bool Init() override;
         void Move() override;
 
@@ -65,6 +68,7 @@ namespace Pong {
     private:
         FLOAT32 mDy = sSpeed;
         const CHAR* sBitmapPath = "paddle.png";
+        const Character& mBall;
         static constexpr FLOAT32 sSpeed = 5.0F;
     };
 
