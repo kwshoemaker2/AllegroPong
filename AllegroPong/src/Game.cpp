@@ -32,6 +32,13 @@ bool Pong::Game::Init()
             return false;
         }
 
+        const bool ttfModuleInit = mTtfModule.Init();
+        if (!ttfModuleInit)
+        {
+            std::cerr << "Could not initialize ttf module" << std::endl;
+            return false;
+        }
+
         const bool imageAddonInit = al_init_image_addon();
         if (imageAddonInit == false)
         {

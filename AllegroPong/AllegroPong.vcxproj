@@ -73,6 +73,7 @@
     <Allegro_AddonFont>true</Allegro_AddonFont>
     <Allegro_LibraryType>DynamicDebug</Allegro_LibraryType>
     <Allegro_AddonImage>true</Allegro_AddonImage>
+    <Allegro_AddonTTF>true</Allegro_AddonTTF>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -141,6 +142,7 @@
     <ClCompile Include="src\AllegroMouse.cpp" />
     <ClCompile Include="src\AllegroTimer.cpp" />
     <ClCompile Include="src\AlMainModule.cpp" />
+    <ClCompile Include="src\AlTtfModule.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameCharacters.cpp" />
     <ClCompile Include="src\KeyPressHandler.cpp" />
@@ -160,6 +162,7 @@
     <ClInclude Include="src\AllegroKeyboard.h" />
     <ClInclude Include="src\AllegroTimer.h" />
     <ClInclude Include="src\AlMainModule.h" />
+    <ClInclude Include="src\AlTtfModule.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameCharacters.h" />
     <ClInclude Include="src\IEventSource.h" />

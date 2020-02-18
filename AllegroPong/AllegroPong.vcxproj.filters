@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -16,26 +8,14 @@
     <Filter Include="AllegroWrappers">
       <UniqueIdentifier>{9146041d-9793-4593-a301-6c93a4f1b996}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pong">
+      <UniqueIdentifier>{851e8a7c-3108-4f05-b165-4f1bbd28acb0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\KeyPressHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameCharacters.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ScoreBoard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\AlFontModule.cpp">
       <Filter>AllegroWrappers</Filter>
     </ClCompile>
@@ -66,23 +46,24 @@
     <ClCompile Include="src\AlMainModule.cpp">
       <Filter>AllegroWrappers</Filter>
     </ClCompile>
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Pong</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameCharacters.cpp">
+      <Filter>Pong</Filter>
+    </ClCompile>
+    <ClCompile Include="src\KeyPressHandler.cpp">
+      <Filter>Pong</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScoreBoard.cpp">
+      <Filter>Pong</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AlTtfModule.cpp">
+      <Filter>AllegroWrappers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\IEventSource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\KeyPressHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GameCharacters.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ScoreBoard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\AlFontModule.h">
       <Filter>AllegroWrappers</Filter>
     </ClInclude>
@@ -117,6 +98,24 @@
       <Filter>AllegroWrappers</Filter>
     </ClInclude>
     <ClInclude Include="src\AlMainModule.h">
+      <Filter>AllegroWrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.h">
+      <Filter>Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameCharacters.h">
+      <Filter>Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IEventSource.h">
+      <Filter>Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="src\KeyPressHandler.h">
+      <Filter>Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ScoreBoard.h">
+      <Filter>Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AlTtfModule.h">
       <Filter>AllegroWrappers</Filter>
     </ClInclude>
   </ItemGroup>

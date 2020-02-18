@@ -11,6 +11,7 @@
 #include "AllegroTimer.h"
 #include "AlMainModule.h"
 #include "AlFontModule.h"
+#include "AlTtfModule.h"
 #include "KeyPressHandler.h"
 #include "AllegroMouseEvent.h"
 #include "ScoreBoard.h"
@@ -45,6 +46,7 @@ namespace Pong {
         AlMainModule mMainModule;
 
         AlFontModule mFontModule;
+        AlTtfModule mTtfModule;
         AllegroBuiltinFont mAllegroFont;
 
         AllegroDisplay mDisplay;
