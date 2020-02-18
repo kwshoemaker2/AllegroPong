@@ -47,7 +47,9 @@ namespace Pong {
 
         AlFontModule mFontModule;
         AlTtfModule mTtfModule;
-        AllegroBuiltinFont mAllegroFont;
+        const CHAR* mFontFile = "data-unifon.ttf";
+        const UINT16 mFontSize = 72;
+        AllegroTtfFont mAllegroFont;
 
         AllegroDisplay mDisplay;
 
@@ -70,6 +72,7 @@ namespace Pong {
         UINT16 mOpponentScore = 0;
 
         Pong::ScoreBoard mPlayerScoreboard;
+        Pong::ScoreBoard mOpponentScoreboard;
     };
 }
 

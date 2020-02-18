@@ -3,13 +3,13 @@
 #include "AllegroPong.h"
 
 namespace Pong {
-    class AllegroBuiltinFont
+    class AllegroTtfFont
     {
     public:
-        AllegroBuiltinFont() = default;
-        ~AllegroBuiltinFont();
+        AllegroTtfFont() = default;
+        ~AllegroTtfFont();
 
-        bool Create();
+        bool Create(const CHAR* fontFile, UINT16 size);
         bool Created() const { return mFont != nullptr; }
         bool Destroy();
 

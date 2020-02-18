@@ -22,9 +22,6 @@
     <ClCompile Include="src\AllegroBitmap.cpp">
       <Filter>AllegroWrappers</Filter>
     </ClCompile>
-    <ClCompile Include="src\AllegroBuiltinFont.cpp">
-      <Filter>AllegroWrappers</Filter>
-    </ClCompile>
     <ClCompile Include="src\AllegroDisplay.cpp">
       <Filter>AllegroWrappers</Filter>
     </ClCompile>
@@ -62,15 +59,15 @@
     <ClCompile Include="src\AlTtfModule.cpp">
       <Filter>AllegroWrappers</Filter>
     </ClCompile>
+    <ClCompile Include="src\AllegroTtfFont.cpp">
+      <Filter>AllegroWrappers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AlFontModule.h">
       <Filter>AllegroWrappers</Filter>
     </ClInclude>
     <ClInclude Include="src\AllegroBitmap.h">
-      <Filter>AllegroWrappers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AllegroBuiltinFont.h">
       <Filter>AllegroWrappers</Filter>
     </ClInclude>
     <ClInclude Include="src\AllegroDisplay.h">
@@ -116,6 +113,9 @@
       <Filter>Pong</Filter>
     </ClInclude>
     <ClInclude Include="src\AlTtfModule.h">
+      <Filter>AllegroWrappers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AllegroTtfFont.h">
       <Filter>AllegroWrappers</Filter>
     </ClInclude>
   </ItemGroup>

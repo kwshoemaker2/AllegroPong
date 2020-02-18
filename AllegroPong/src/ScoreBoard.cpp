@@ -4,7 +4,7 @@
 
 namespace Pong {
 
-ScoreBoard::ScoreBoard(const AllegroBuiltinFont& font, FLOAT32 drawX, FLOAT32 drawY)
+ScoreBoard::ScoreBoard(const AllegroTtfFont& font, FLOAT32 drawX, FLOAT32 drawY)
     :mDrawX(drawX),
      mDrawY(drawY),
      mAllegroFont(font)

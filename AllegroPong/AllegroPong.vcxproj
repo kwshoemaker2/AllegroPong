@@ -134,7 +134,7 @@
   <ItemGroup>
     <ClCompile Include="src\AlFontModule.cpp" />
     <ClCompile Include="src\AllegroBitmap.cpp" />
-    <ClCompile Include="src\AllegroBuiltinFont.cpp" />
+    <ClCompile Include="src\AllegroTtfFont.cpp" />
     <ClCompile Include="src\AllegroDisplay.cpp" />
     <ClCompile Include="src\AllegroEventQueue.cpp" />
     <ClCompile Include="src\AllegroKeyboard.cpp" />
@@ -152,7 +152,7 @@
   <ItemGroup>
     <ClInclude Include="src\AlFontModule.h" />
     <ClInclude Include="src\AllegroBitmap.h" />
-    <ClInclude Include="src\AllegroBuiltinFont.h" />
+    <ClInclude Include="src\AllegroTtfFont.h" />
     <ClInclude Include="src\AllegroDisplay.h" />
     <ClInclude Include="src\AllegroEventQueue.h" />
     <ClInclude Include="src\AllegroKeyboardState.h" />

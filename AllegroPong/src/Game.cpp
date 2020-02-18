@@ -9,7 +9,8 @@ Pong::Game::Game()
     :mBall(sDisplayWidth, sDisplayHeight),
      mPlayer(mKeyPressHandler),
      mOpponent(mBall),
-     mPlayerScoreboard(mAllegroFont, sDisplayWidth / 2.0F, sDisplayHeight / 2.0F)
+     mPlayerScoreboard(mAllegroFont, sDisplayWidth / 3.0F, 0.0F),
+     mOpponentScoreboard(mAllegroFont, ((2 * sDisplayWidth) / 3.0F), 0.0F)
 {
 }
 
@@ -66,7 +67,7 @@ bool Pong::Game::Init()
         mOpponent.Init();
         mBall.Init();
 
-        mAllegroFont.Create();
+        mAllegroFont.Create(mFontFile, mFontSize);
 
         mInitialized = true;
     }
@@ -117,6 +118,7 @@ bool Pong::Game::GameLoop()
                 if (mBall.HandleCharacterMiss(mPlayer))
                 {
                     mOpponentScore++;
+                    mOpponentScoreboard.Update(mOpponentScore);
                 }
                 else if (mBall.HandleCharacterMiss(mOpponent))
                 {
@@ -158,11 +160,12 @@ bool Pong::Game::GameLoop()
         if (redraw && mEventQueue.IsEmpty())
         {
             mDisplay.SetColor(0, 0, 0);
+
             mPlayer.Draw();
             mOpponent.Draw();
             mBall.Draw();
-
             mPlayerScoreboard.Draw();
+            mOpponentScoreboard.Draw();
 
             mDisplay.Update();
             redraw = false;

@@ -1,23 +1,24 @@
-#include "AllegroBuiltinFont.h"
+#include <allegro5/allegro_ttf.h>
+#include "AllegroTtfFont.h"
 
 namespace Pong {
-    AllegroBuiltinFont::~AllegroBuiltinFont()
+    AllegroTtfFont::~AllegroTtfFont()
     {
         Destroy();
     }
 
-    bool AllegroBuiltinFont::Create()
+    bool AllegroTtfFont::Create(const CHAR* fontFile, UINT16 size)
     {
         bool retval = true;
         if (!Created())
         {
-            mFont = al_create_builtin_font();
+            mFont = al_load_ttf_font(fontFile, size, 0);
             retval = (mFont != nullptr);
         }
         return retval;
     }
 
-    bool AllegroBuiltinFont::Destroy()
+    bool AllegroTtfFont::Destroy()
     {
         if (Created())
         {
