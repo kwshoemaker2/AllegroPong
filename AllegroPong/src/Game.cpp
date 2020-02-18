@@ -117,12 +117,12 @@ bool Pong::Game::GameLoop()
 
                 if (mBall.HandleCharacterMiss(mPlayer))
                 {
-                    mOpponentScore++;
+                    mOpponentScore = (++mOpponentScore % 10);
                     mOpponentScoreboard.Update(mOpponentScore);
                 }
                 else if (mBall.HandleCharacterMiss(mOpponent))
                 {
-                    mPlayerScore++;
+                    mPlayerScore = (++mPlayerScore % 10);
                     mPlayerScoreboard.Update(mPlayerScore);
                 }
 
