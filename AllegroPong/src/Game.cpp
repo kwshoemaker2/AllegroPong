@@ -4,10 +4,12 @@
 const std::string Pong::Game::sImagePath = "image.png";
 const FLOAT64 Pong::Game::sFps = 60.0;
 
+////////////////////////////////////////////////////////////////////////////////
 Pong::Game::Game()
     :mBall(sDisplayWidth, sDisplayHeight),
      mPlayer(mKeyPressHandler),
-     mOpponent(mBall)
+     mOpponent(mBall),
+     mPlayerScoreboard(mAllegroFont, sDisplayWidth / 2.0F, sDisplayHeight / 2.0F)
 {
 }
 
@@ -20,6 +22,13 @@ bool Pong::Game::Init()
         if (mainModuleInit == false)
         {
             std::cerr << "Could not initialize main module" << std::endl;
+            return false;
+        }
+
+        const bool fontModuleInit = mFontModule.Init();
+        if (!fontModuleInit)
+        {
+            std::cerr << "Could not initialize font module" << std::endl;
             return false;
         }
 
@@ -49,6 +58,8 @@ bool Pong::Game::Init()
         mPlayer.Init();
         mOpponent.Init();
         mBall.Init();
+
+        mAllegroFont.Create();
 
         mInitialized = true;
     }
@@ -99,12 +110,11 @@ bool Pong::Game::GameLoop()
                 if (mBall.HandleCharacterMiss(mPlayer))
                 {
                     mOpponentScore++;
-                    std::cout << "Opponent scored: " << mOpponentScore << std::endl;
                 }
                 else if (mBall.HandleCharacterMiss(mOpponent))
                 {
                     mPlayerScore++;
-                    std::cout << "Player scored: " << mPlayerScore << std::endl;
+                    mPlayerScoreboard.Update(mPlayerScore);
                 }
 
                 mKeyPressHandler.ClearPresses();
@@ -144,6 +154,8 @@ bool Pong::Game::GameLoop()
             mPlayer.Draw();
             mOpponent.Draw();
             mBall.Draw();
+
+            mPlayerScoreboard.Draw();
 
             mDisplay.Update();
             redraw = false;

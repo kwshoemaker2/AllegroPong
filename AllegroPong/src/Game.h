@@ -10,8 +10,10 @@
 #include "AllegroBitmap.h"
 #include "AllegroTimer.h"
 #include "AlMainModule.h"
+#include "AlFontModule.h"
 #include "KeyPressHandler.h"
 #include "AllegroMouseEvent.h"
+#include "ScoreBoard.h"
 #include "GameCharacters.h"
 
 namespace Pong {
@@ -34,13 +36,17 @@ namespace Pong {
         ////////////////////////////////////////////////////////////////////////////
         bool GameLoop();
 
+        static const INT32 sDisplayWidth = 640;
+        static const INT32 sDisplayHeight = 480;
+
         bool mInitialized = false;
         bool mRunning = false;
 
         AlMainModule mMainModule;
 
-        static const INT32 sDisplayWidth = 640;
-        static const INT32 sDisplayHeight = 480;
+        AlFontModule mFontModule;
+        AllegroBuiltinFont mAllegroFont;
+
         AllegroDisplay mDisplay;
 
         AllegroEventQueue mEventQueue;
@@ -60,6 +66,8 @@ namespace Pong {
 
         UINT16 mPlayerScore = 0;
         UINT16 mOpponentScore = 0;
+
+        Pong::ScoreBoard mPlayerScoreboard;
     };
 }
 

@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Allegro_AddonFont>false</Allegro_AddonFont>
+    <Allegro_AddonFont>true</Allegro_AddonFont>
     <Allegro_LibraryType>DynamicDebug</Allegro_LibraryType>
     <Allegro_AddonImage>true</Allegro_AddonImage>
   </PropertyGroup>
@@ -131,7 +131,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AlFontModule.cpp" />
     <ClCompile Include="src\AllegroBitmap.cpp" />
+    <ClCompile Include="src\AllegroBuiltinFont.cpp" />
     <ClCompile Include="src\AllegroDisplay.cpp" />
     <ClCompile Include="src\AllegroEventQueue.cpp" />
     <ClCompile Include="src\AllegroKeyboard.cpp" />
@@ -143,9 +145,12 @@
     <ClCompile Include="src\GameCharacters.cpp" />
     <ClCompile Include="src\KeyPressHandler.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\ScoreBoard.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AlFontModule.h" />
     <ClInclude Include="src\AllegroBitmap.h" />
+    <ClInclude Include="src\AllegroBuiltinFont.h" />
     <ClInclude Include="src\AllegroDisplay.h" />
     <ClInclude Include="src\AllegroEventQueue.h" />
     <ClInclude Include="src\AllegroKeyboardState.h" />
@@ -159,6 +164,7 @@
     <ClInclude Include="src\GameCharacters.h" />
     <ClInclude Include="src\IEventSource.h" />
     <ClInclude Include="src\KeyPressHandler.h" />
+    <ClInclude Include="src\ScoreBoard.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="ball.png" />
