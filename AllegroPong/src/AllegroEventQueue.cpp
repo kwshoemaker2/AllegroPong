@@ -1,6 +1,6 @@
 #include "AllegroEventQueue.h"
 
-using namespace Pong;
+namespace Pong {
 
 ////////////////////////////////////////////////////////////////////////////////
 AllegroEventQueue::~AllegroEventQueue()
@@ -9,7 +9,7 @@ AllegroEventQueue::~AllegroEventQueue()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroEventQueue::Create()
+bool AllegroEventQueue::Create()
 {
     if (mEventQueue == nullptr)
     {
@@ -20,7 +20,7 @@ bool Pong::AllegroEventQueue::Create()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroEventQueue::Destroy()
+bool AllegroEventQueue::Destroy()
 {
     if (mEventQueue != nullptr)
     {
@@ -32,7 +32,7 @@ bool Pong::AllegroEventQueue::Destroy()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroEventQueue::Wait(ALLEGRO_EVENT* evt)
+bool AllegroEventQueue::Wait(ALLEGRO_EVENT* evt)
 {
     if (mEventQueue != nullptr)
     {
@@ -42,13 +42,13 @@ bool Pong::AllegroEventQueue::Wait(ALLEGRO_EVENT* evt)
     return false;
 }
 
-bool Pong::AllegroEventQueue::IsEmpty() const
+bool AllegroEventQueue::IsEmpty() const
 {
     return al_is_event_queue_empty(mEventQueue);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroEventQueue::RegisterEventSource(const IEventSource& eventSource)
+bool AllegroEventQueue::RegisterEventSource(const IEventSource& eventSource)
 {
     if (mEventQueue != nullptr)
     {
@@ -56,4 +56,6 @@ bool Pong::AllegroEventQueue::RegisterEventSource(const IEventSource& eventSourc
         return true;
     }
     return false;
+}
+
 }

@@ -1,33 +1,35 @@
 #include <cstdlib>
 #include "GameCharacters.h"
 
+namespace Pong {
+
 ////////////////////////////////////////////////////////////////////////////////
-void Pong::Character::Draw()
+void Character::Draw()
 {
     mBitmap.Draw(mCoords.X, mCoords.Y, 0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-FLOAT32 Pong::Character::GetHeight() const
+FLOAT32 Character::GetHeight() const
 {
     return static_cast<FLOAT32>(mBitmap.GetHeight());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-FLOAT32 Pong::Character::GetWidth() const
+FLOAT32 Character::GetWidth() const
 {
     return static_cast<FLOAT32>(mBitmap.GetWidth());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::Player::Init()
+bool Player::Init()
 {
     mCoords.X = 50.0F;
     return mBitmap.Load(sBitmapPath);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Pong::Player::Move()
+void Player::Move()
 {
     if (mKeyPressHandler.KeyWasPressed(ALLEGRO_KEY_UP))
     {
@@ -40,13 +42,13 @@ void Pong::Player::Move()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Pong::Player::DoMouseEvent(const AllegroMouseEvent& mouseEvent)
+void Player::DoMouseEvent(const AllegroMouseEvent& mouseEvent)
 {
     mCoords.Y = static_cast<FLOAT32>(mouseEvent.GetMouseY());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Pong::Player::HandleCollisionWithDisplay(const AllegroDisplay& display)
+void Player::HandleCollisionWithDisplay(const AllegroDisplay& display)
 {
     const auto lowerHeight = display.GetHeight() - GetHeight();
     if (mCoords.Y < 0)
@@ -60,7 +62,7 @@ void Pong::Player::HandleCollisionWithDisplay(const AllegroDisplay& display)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Pong::Player::HandleCollisionWithCharacter(const Character& character)
+void Player::HandleCollisionWithCharacter(const Character& character)
 {
     const bool collidesX = ((GetX() + GetWidth()) >= character.GetX()) &&
         ((character.GetX() + character.GetWidth()) >= GetX());
@@ -74,13 +76,13 @@ void Pong::Player::HandleCollisionWithCharacter(const Character& character)
     }
 }
 
-Pong::Opponent::Opponent(const Character& ball)
+Opponent::Opponent(const Character& ball)
     :mBall(ball)
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::Opponent::Init()
+bool Opponent::Init()
 {
     bool retval = mBitmap.Load(sBitmapPath);
     if (retval)
@@ -93,7 +95,7 @@ bool Pong::Opponent::Init()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Pong::Opponent::Move()
+void Opponent::Move()
 {
     if (mBall.GetY() > mCoords.Y)
     {
@@ -109,7 +111,7 @@ void Pong::Opponent::Move()
     mCoords.Y += mDy;
 }
 
-void Pong::Opponent::HandleCollisionWithDisplay(const AllegroDisplay& display)
+void Opponent::HandleCollisionWithDisplay(const AllegroDisplay& display)
 {
     const auto lowerHeight = display.GetHeight() - GetHeight();
     if (mCoords.Y < 0)
@@ -122,14 +124,14 @@ void Pong::Opponent::HandleCollisionWithDisplay(const AllegroDisplay& display)
     }
 }
 
-Pong::Ball::Ball(FLOAT32 displayWidth, FLOAT32 displayHeight)
+Ball::Ball(FLOAT32 displayWidth, FLOAT32 displayHeight)
     :mInitX((displayWidth / 2.0F)),
      mInitY((displayHeight / 2.0F))
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::Ball::Init()
+bool Ball::Init()
 {
     bool retval = mBitmap.Load(sBitmapPath);
     if (retval)
@@ -141,14 +143,14 @@ bool Pong::Ball::Init()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Pong::Ball::Move()
+void Ball::Move()
 {
     mCoords.X += mDx;
     mCoords.Y += mDy;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Pong::Ball::HandleCollisionWithDisplay(const AllegroDisplay& display)
+void Ball::HandleCollisionWithDisplay(const AllegroDisplay& display)
 {
     const auto lowerHeight = display.GetHeight() - GetHeight();
     if (mCoords.Y < 0)
@@ -166,7 +168,7 @@ void Pong::Ball::HandleCollisionWithDisplay(const AllegroDisplay& display)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Pong::Ball::HandleCollisionWithCharacter(const Character& character)
+void Ball::HandleCollisionWithCharacter(const Character& character)
 {
     const bool collidesX = ((GetX() + GetWidth()) >= character.GetX()) &&
                            ((character.GetX() + character.GetWidth()) >= GetX());
@@ -183,7 +185,7 @@ void Pong::Ball::HandleCollisionWithCharacter(const Character& character)
     }
 }
 
-bool Pong::Ball::HandleCharacterMiss(const Character& character)
+bool Ball::HandleCharacterMiss(const Character& character)
 {
     const bool collidesX = ((GetX() + GetWidth()) >= character.GetX()) &&
         ((character.GetX() + character.GetWidth()) >= GetX());
@@ -204,8 +206,10 @@ bool Pong::Ball::HandleCharacterMiss(const Character& character)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Pong::Ball::MoveToInitCoords()
+void Ball::MoveToInitCoords()
 {
     mCoords.X = mInitX - GetWidth();
     mCoords.Y = mInitY - GetHeight();
 }
+}
+

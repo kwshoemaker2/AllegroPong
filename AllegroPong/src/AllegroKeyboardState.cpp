@@ -2,8 +2,10 @@
 
 using namespace Pong;
 
+namespace Pong {
+
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroKeyboardState::Refresh()
+bool AllegroKeyboardState::Refresh()
 {
     mKeyboardState = { 0 };
     al_get_keyboard_state(&mKeyboardState);
@@ -11,7 +13,9 @@ bool Pong::AllegroKeyboardState::Refresh()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroKeyboardState::KeyIsDown(INT32 allegroKeyCode) const
+bool AllegroKeyboardState::KeyIsDown(INT32 allegroKeyCode) const
 {
     return al_key_down(&mKeyboardState, allegroKeyCode);
+}
+
 }

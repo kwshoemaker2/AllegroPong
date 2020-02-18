@@ -1,7 +1,6 @@
 #include "AllegroMouse.h"
 
-using namespace Pong;
-
+namespace Pong {
 
 ////////////////////////////////////////////////////////////////////////////////
 AllegroMouse::~AllegroMouse()
@@ -10,7 +9,7 @@ AllegroMouse::~AllegroMouse()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroMouse::Create()
+bool AllegroMouse::Create()
 {
     if (!mCreated)
     {
@@ -20,7 +19,7 @@ bool Pong::AllegroMouse::Create()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroMouse::Destroy()
+bool AllegroMouse::Destroy()
 {
     if (mCreated)
     {
@@ -31,13 +30,15 @@ bool Pong::AllegroMouse::Destroy()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroMouse::SetXY(AllegroDisplay& display, INT32 x, INT32 y)
+bool AllegroMouse::SetXY(AllegroDisplay& display, INT32 x, INT32 y)
 {
     return al_set_mouse_xy(display.GetRaw(), x, y);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-EventSource* Pong::AllegroMouse::GetEventSource() const
+EventSource* AllegroMouse::GetEventSource() const
 {
     return al_get_mouse_event_source();
+}
+
 }

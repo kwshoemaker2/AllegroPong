@@ -1,7 +1,7 @@
 #include "AllegroKeyboard.h"
 #include <allegro5/allegro.h>
 
-using namespace Pong;
+namespace Pong {
 
 ////////////////////////////////////////////////////////////////////////////////
 AllegroKeyboard::~AllegroKeyboard()
@@ -17,7 +17,7 @@ bool AllegroKeyboard::Create()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroKeyboard::Destroy()
+bool AllegroKeyboard::Destroy()
 {
     if (mCreated)
     {
@@ -32,4 +32,6 @@ bool Pong::AllegroKeyboard::Destroy()
 EventSource* AllegroKeyboard::GetEventSource() const
 {
     return al_get_keyboard_event_source();
+}
+
 }

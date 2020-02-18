@@ -3,14 +3,16 @@
 #define KEY_SEEN (1 << 0)
 #define KEY_RELEASED (1 << 1)
 
+namespace Pong {
+
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::KeyPressHandler::KeyWasPressed(INT32 keyCode) const
+bool KeyPressHandler::KeyWasPressed(INT32 keyCode) const
 {
     return (mKeyPresses[keyCode] != 0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Pong::KeyPressHandler::ClearPresses()
+void KeyPressHandler::ClearPresses()
 {
     for (auto& keyPress : mKeyPresses)
     {
@@ -19,13 +21,15 @@ void Pong::KeyPressHandler::ClearPresses()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Pong::KeyPressHandler::KeyDown(INT32 keyCode)
+void KeyPressHandler::KeyDown(INT32 keyCode)
 {
     mKeyPresses[keyCode] = KEY_SEEN | KEY_RELEASED;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Pong::KeyPressHandler::KeyUp(INT32 keyCode)
+void KeyPressHandler::KeyUp(INT32 keyCode)
 {
     mKeyPresses[keyCode] &= KEY_RELEASED;
+}
+
 }

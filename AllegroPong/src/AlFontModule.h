@@ -3,17 +3,20 @@
 #include <allegro5/allegro_font.h>
 #include "AllegroPong.h"
 
-class AlFontModule
-{
-public:
-    AlFontModule() = default;
+namespace Pong {
 
-    ~AlFontModule();
+    class AlFontModule
+    {
+    public:
+        AlFontModule() = default;
 
-    bool Init();
-    bool IsInitialized() const;
-    bool Destroy();
-private:
-    bool mInitialized = false;
-};
+        ~AlFontModule();
 
+        bool Init();
+        bool IsInitialized() const;
+        bool Destroy();
+    private:
+        bool mInitialized = false;
+    };
+
+}

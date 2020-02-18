@@ -1,26 +1,28 @@
 #include <allegro5/allegro.h>
 #include "AlMainModule.h"
 
+namespace Pong {
+
 ////////////////////////////////////////////////////////////////////////////////
-Pong::AlMainModule::~AlMainModule()
+AlMainModule::~AlMainModule()
 {
     Destroy();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AlMainModule::Create()
+bool AlMainModule::Create()
 {
     return al_init();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AlMainModule::IsInitialized() const
+bool AlMainModule::IsInitialized() const
 {
     return al_is_system_installed();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AlMainModule::Destroy()
+bool AlMainModule::Destroy()
 {
     if (IsInitialized())
     {
@@ -28,4 +30,6 @@ bool Pong::AlMainModule::Destroy()
         return true;
     }
     return false;
+}
+
 }

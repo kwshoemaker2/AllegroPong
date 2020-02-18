@@ -1,11 +1,13 @@
 #include <iostream>
 #include "Game.h"
 
-const std::string Pong::Game::sImagePath = "image.png";
-const FLOAT64 Pong::Game::sFps = 60.0;
+namespace Pong {
+
+const std::string Game::sImagePath = "image.png";
+const FLOAT64 Game::sFps = 60.0;
 
 ////////////////////////////////////////////////////////////////////////////////
-Pong::Game::Game()
+Game::Game()
     :mBall(sDisplayWidth, sDisplayHeight),
      mPlayer(mKeyPressHandler),
      mOpponent(mBall),
@@ -15,7 +17,7 @@ Pong::Game::Game()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::Game::Init()
+bool Game::Init()
 {
     if (!mInitialized && !mRunning)
     {
@@ -76,7 +78,7 @@ bool Pong::Game::Init()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::Game::Run()
+bool Game::Run()
 {
     bool success = false;
     if (mInitialized)
@@ -87,7 +89,7 @@ bool Pong::Game::Run()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::Game::GameLoop()
+bool Game::GameLoop()
 {
     mRunning = true;
 
@@ -173,4 +175,6 @@ bool Pong::Game::GameLoop()
     }
 
     return true;
+}
+
 }

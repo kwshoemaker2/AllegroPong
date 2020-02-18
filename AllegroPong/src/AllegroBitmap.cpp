@@ -1,6 +1,6 @@
 #include "AllegroBitmap.h"
 
-using namespace Pong;
+namespace Pong {
 
 ////////////////////////////////////////////////////////////////////////////////
 AllegroBitmap::~AllegroBitmap()
@@ -9,7 +9,7 @@ AllegroBitmap::~AllegroBitmap()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroBitmap::Load(const CHAR* path)
+bool AllegroBitmap::Load(const CHAR* path)
 {
     if (mBitmap == nullptr)
     {
@@ -20,7 +20,7 @@ bool Pong::AllegroBitmap::Load(const CHAR* path)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroBitmap::Destroy()
+bool AllegroBitmap::Destroy()
 {
     if (mBitmap != nullptr)
     {
@@ -32,20 +32,22 @@ bool Pong::AllegroBitmap::Destroy()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroBitmap::Draw(FLOAT32 dx, FLOAT32 dy, INT32 flags)
+bool AllegroBitmap::Draw(FLOAT32 dx, FLOAT32 dy, INT32 flags)
 {
     al_draw_bitmap(mBitmap, dx, dy, 0);
     return true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-INT32 Pong::AllegroBitmap::GetWidth() const
+INT32 AllegroBitmap::GetWidth() const
 {
     return al_get_bitmap_width(mBitmap);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-INT32 Pong::AllegroBitmap::GetHeight() const
+INT32 AllegroBitmap::GetHeight() const
 {
     return al_get_bitmap_height(mBitmap);
+}
+
 }

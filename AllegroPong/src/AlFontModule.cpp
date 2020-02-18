@@ -1,6 +1,9 @@
 #include <allegro5/allegro_font.h>
 #include "AlFontModule.h"
 
+namespace Pong {
+
+////////////////////////////////////////////////////////////////////////////////
 AlFontModule::~AlFontModule()
 {
     if (IsInitialized())
@@ -9,6 +12,7 @@ AlFontModule::~AlFontModule()
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////
 bool AlFontModule::Init()
 {
     bool retval = true;
@@ -20,11 +24,13 @@ bool AlFontModule::Init()
     return retval;
 }
 
+////////////////////////////////////////////////////////////////////////////////
 bool AlFontModule::IsInitialized() const
 {
     return mInitialized;
 }
 
+////////////////////////////////////////////////////////////////////////////////
 bool AlFontModule::Destroy()
 {
     if (IsInitialized())
@@ -32,4 +38,6 @@ bool AlFontModule::Destroy()
         al_shutdown_font_addon();
     }
     return true;
+}
+
 }

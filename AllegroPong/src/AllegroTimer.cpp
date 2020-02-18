@@ -1,6 +1,6 @@
 #include "AllegroTimer.h"
 
-using namespace Pong;
+namespace Pong {
 
 ////////////////////////////////////////////////////////////////////////////////
 AllegroTimer::~AllegroTimer()
@@ -9,7 +9,7 @@ AllegroTimer::~AllegroTimer()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroTimer::Create(FLOAT64 seconds)
+bool AllegroTimer::Create(FLOAT64 seconds)
 {
     if (mAllegroTimer == nullptr)
     {
@@ -20,7 +20,7 @@ bool Pong::AllegroTimer::Create(FLOAT64 seconds)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroTimer::Destroy()
+bool AllegroTimer::Destroy()
 {
     if (mAllegroTimer != nullptr)
     {
@@ -33,7 +33,7 @@ bool Pong::AllegroTimer::Destroy()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroTimer::Start()
+bool AllegroTimer::Start()
 {
     if (al_get_timer_started(mAllegroTimer) == false)
     {
@@ -45,7 +45,7 @@ bool Pong::AllegroTimer::Start()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-bool Pong::AllegroTimer::Stop()
+bool AllegroTimer::Stop()
 {
     if (al_get_timer_started(mAllegroTimer))
     {
@@ -58,7 +58,9 @@ bool Pong::AllegroTimer::Stop()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-EventSource* Pong::AllegroTimer::GetEventSource() const
+EventSource* AllegroTimer::GetEventSource() const
 {
     return al_get_timer_event_source(mAllegroTimer);
+}
+
 }

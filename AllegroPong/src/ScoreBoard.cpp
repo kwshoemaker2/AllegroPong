@@ -4,6 +4,7 @@
 
 namespace Pong {
 
+////////////////////////////////////////////////////////////////////////////////
 ScoreBoard::ScoreBoard(const AllegroTtfFont& font, FLOAT32 drawX, FLOAT32 drawY)
     :mDrawX(drawX),
      mDrawY(drawY),
@@ -11,11 +12,13 @@ ScoreBoard::ScoreBoard(const AllegroTtfFont& font, FLOAT32 drawX, FLOAT32 drawY)
 {
 }
 
+////////////////////////////////////////////////////////////////////////////////
 void ScoreBoard::Update(UINT32 newScore)
 {
     mDrawScore = newScore;
 }
 
+////////////////////////////////////////////////////////////////////////////////
 void ScoreBoard::Draw()
 {
     const auto scoreStr = std::to_string(mDrawScore);

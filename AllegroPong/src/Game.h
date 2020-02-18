@@ -71,8 +71,8 @@ namespace Pong {
         UINT16 mPlayerScore = 0;
         UINT16 mOpponentScore = 0;
 
-        Pong::ScoreBoard mPlayerScoreboard;
-        Pong::ScoreBoard mOpponentScoreboard;
+        ScoreBoard mPlayerScoreboard;
+        ScoreBoard mOpponentScoreboard;
     };
 }
 
