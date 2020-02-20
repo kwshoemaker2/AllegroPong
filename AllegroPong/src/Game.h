@@ -12,10 +12,12 @@
 #include "AlMainModule.h"
 #include "AlFontModule.h"
 #include "AlTtfModule.h"
+#include "AlPrimitivesModule.h"
 #include "KeyPressHandler.h"
 #include "AllegroMouseEvent.h"
 #include "ScoreBoard.h"
 #include "GameCharacters.h"
+#include "PongBoard.h"
 
 namespace Pong {
     ////////////////////////////////////////////////////////////////////////////
@@ -51,6 +53,8 @@ namespace Pong {
         const UINT16 mFontSize = 72;
         AllegroTtfFont mAllegroFont;
 
+        AlPrimitivesModule mPrimitivesModule;
+
         AllegroDisplay mDisplay;
 
         AllegroEventQueue mEventQueue;
@@ -73,6 +77,7 @@ namespace Pong {
 
         ScoreBoard mPlayerScoreboard;
         ScoreBoard mOpponentScoreboard;
+        PongBoard mPongBoard;
     };
 }
 

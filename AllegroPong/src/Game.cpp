@@ -12,7 +12,8 @@ Game::Game()
      mPlayer(mKeyPressHandler),
      mOpponent(mBall),
      mPlayerScoreboard(mAllegroFont, sDisplayWidth / 3.0F, 0.0F),
-     mOpponentScoreboard(mAllegroFont, ((2 * sDisplayWidth) / 3.0F), 0.0F)
+     mOpponentScoreboard(mAllegroFont, ((2 * sDisplayWidth) / 3.0F), 0.0F),
+     mPongBoard(sDisplayWidth, sDisplayHeight)
 {
 }
 
@@ -46,6 +47,13 @@ bool Game::Init()
         if (imageAddonInit == false)
         {
             std::cerr << "Could not intialize image addon" << std::endl;
+            return false;
+        }
+
+        const bool primitivesAddonInit = mPrimitivesModule.Init();
+        if (!primitivesAddonInit)
+        {
+            std::cerr << "Could not initialize primitives module" << std::endl;
             return false;
         }
 
@@ -168,6 +176,7 @@ bool Game::GameLoop()
             mBall.Draw();
             mPlayerScoreboard.Draw();
             mOpponentScoreboard.Draw();
+            mPongBoard.Draw();
 
             mDisplay.Update();
             redraw = false;
